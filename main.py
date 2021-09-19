@@ -4,7 +4,6 @@ import discord
 import random
 from datetime import datetime
 from shlex import split
-import asyncio
 
 client = discord.Client()
 
@@ -35,17 +34,31 @@ async def on_message(message):
 
     if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
         jed_appreciate = jedAppreciate()
-        print(jed_appreciate)
         if jed_appreciate == True:
-            await message.add_reaction(emoji="🔇")
+            await message.add_reaction(emoji="💙")
+            await message.channel.send("We are now appreciating Jed!")
         else:
-            await message.add_reaction(emoji="🔊")
+            await message.add_reaction(emoji="💔")
         return
 
     if str(message.author) == "Jed#4434" and jed_appreciate == True:
-        r = int(random.random()*10)
+        r = int(random.random()*30)
         if r == 0:
-            await message.channel.send("")
+            await message.channel.send("I'm with you 100%!")
+        elif r == 1:
+            await message.channel.send("That's a very good point, Jed.")
+        elif r == 2:
+            await message.channel.send("Hey, I think we should all play Valheim some day.")
+        elif r == 3:
+            await message.channel.send("Sending you lots of love and kisses 💙")
+        elif r == 4:
+            await message.add_reaction(emoji="🙌")
+        elif r == 5:
+            await message.add_reaction(emoji="😍")
+        elif r == 6:
+            await message.add_reaction(emoji="💯")
+        elif r == 7:
+            await message.add_reaction(emoji="🔥")
         return
 
     ### NOT COMMANDS - MONITOR CHAT
