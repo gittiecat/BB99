@@ -65,6 +65,7 @@ async def on_message(message):
     if not message.content.startswith('$'):
         if str(message.author) == "Jed#4434" and "valheim" in str(message.content).lower():
             await message.add_reaction(emoji="❤")
+            await message.channel.send("Buy the game here: https://store.steampowered.com/app/892970/Valheim/")
             await message.author.send("Hey, man! I just want to tell you that we all appreciate you very much and that I really like your dedication for this 'Valheim' game. I hope we play together at some point!")
             return
 
