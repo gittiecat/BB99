@@ -4,6 +4,12 @@ import discord
 import random
 from datetime import datetime
 from shlex import split
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 client = discord.Client()
 
@@ -21,7 +27,7 @@ def splitMessage(message):
     return split_message
 
 @client.event
-async def on_read():
+async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
 @client.event
@@ -166,4 +172,4 @@ async def on_message(message):
     ##########
 
 
-client.run('ODg2MjIxMTE3ODAxNTAwNzAy.YTybuw.yGf3-crpCBmFn6bRjL6z3UsuHBM')
+client.run(TOKEN)
