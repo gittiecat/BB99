@@ -4,8 +4,8 @@ Discord bot that does various things
 Clone the repository
 Install Python
 
-Create your own bot:
-    - https://discord.com/developers/applications\
+Create your own bot:\
+    - https://discord.com/developers/applications \
     - Create a new application and create a bot\
     - Copy its token\
     - Create a file in your working directory '.env'\
