@@ -168,15 +168,14 @@ async def on_message(message):
 
     ### HELP MESSAGE
     if message.content.startswith('$help'):
-        help_message = "Hi! I am a bot for the **{server}** server!\n"
+        help_message = "Hi! I am a bot for the **{server}** server!\n".format(server = message.guild)
         help_message += "1) $help - to get help\n"
         help_message += "2) $badwordstats <no. top(optional)> - get the stats on the top bad words of the server!\n"
         help_message += "3) $badwordnew <word> - add a new bad word to the list of bad words!\n"
         help_message += "4) $acc <BattleTag> - to get account info (must be public!)\n"
         help_message += "5) $hi - say hello to me and I'll respond back!\n"
         help_message += "6) $jed - mute Jed whenever you want if he gets annoying!\n"
-        help_message += "7) $ro - show Ro his deserved overwatch rank 😈\n"\
-                            .format(server = message.guild)
+        help_message += "7) $ro - show Ro his deserved overwatch rank 😈\n"
         await message.channel.send(help_message)
         return
     ########## EASY TO READ FORMAT
