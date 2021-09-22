@@ -18,9 +18,13 @@ all_words = wdb.getAllWords()
 del wdb
 
 jed_appreciate = False
+ro_troll = False
 
 def jedAppreciate():
     return not jed_appreciate
+
+def roTroll():
+    return not ro_troll
 
 def splitMessage(message):
     split_message = split(message.content)
@@ -37,17 +41,29 @@ async def on_message(message):
         return
 
     global jed_appreciate
+    global ro_troll
 
     if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
         jed_appreciate = jedAppreciate()
-        if jed_appreciate == True:
+        if jed_appreciate:
             await message.add_reaction(emoji="💙")
             await message.channel.send("We are now appreciating Jed!")
         else:
             await message.add_reaction(emoji="💔")
         return
 
-    if str(message.author) == "Jed#4434" and jed_appreciate == True:
+    if message.content.startswith("$ro") and not str(message.author) == "Stokey™#9852":
+        ro_troll = roTroll()
+        if ro_troll:
+            await message.add_reaction(emoji="😈")
+        else:
+            await message.add_reaction(emoji="😇")
+        return
+
+    if str(message.author) == "Stokey™#9852" and ro_troll:
+        await message.add_reaction(emoji = "<:bronzerank:890252007468838984>")
+
+    if str(message.author) == "Jed#4434" and jed_appreciate:
         r = int(random.random()*30)
         if r == 0:
             await message.channel.send("I'm with you 100%!")
@@ -153,12 +169,13 @@ async def on_message(message):
     ### HELP MESSAGE
     if message.content.startswith('$help'):
         help_message = "Hi! I am a bot for the **{server}** server!\n"
-        help_message = help_message + "1) $help - to get help\n"
-        help_message = help_message + "2) $badwordstats <no. top(optional)> - get the stats on the top bad words of the server!\n"
-        help_message = help_message + "3) $badwordnew <word> - add a new bad word to the list of bad words!\n"
-        help_message = help_message + "4) $acc <BattleTag> - to get account info (must be public!)\n"
-        help_message = help_message + "5) $hi - say hello to me and I'll respond back!\n"
-        help_message = help_message + "6) $jed - mute Jed whenever you want if he gets annoying!"\
+        help_message += "1) $help - to get help\n"
+        help_message += "2) $badwordstats <no. top(optional)> - get the stats on the top bad words of the server!\n"
+        help_message += "3) $badwordnew <word> - add a new bad word to the list of bad words!\n"
+        help_message += "4) $acc <BattleTag> - to get account info (must be public!)\n"
+        help_message += "5) $hi - say hello to me and I'll respond back!\n"
+        help_message += "6) $jed - mute Jed whenever you want if he gets annoying!\n"
+        help_message += "7) $ro - show Ro his deserved overwatch rank 😈\n"\
                             .format(server = message.guild)
         await message.channel.send(help_message)
         return

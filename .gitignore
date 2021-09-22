@@ -2,3 +2,4 @@ __pycache__
 jedJSON.json
 test.py
 .env
+tasks.py
