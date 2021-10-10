@@ -7,6 +7,7 @@ from datetime import datetime
 from shlex import split
 import os
 from dotenv import load_dotenv
+import subprocess
 
 load_dotenv()
 
@@ -40,20 +41,24 @@ def splitMessage(message):
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     s = client.guilds[0].text_channels[0]
-    await s.send("{0} online and ready to exist!".format((client.user)))
+    await s.send("{0} online and fully updated!".format(client.user))
 
 @client.event
 async def on_message(message):
+    # set global variables for this method
+    global jed_appreciate
+    global ro_troll
+
     ### DO NOT MOVE - MUST ALWAYS BE ON TOP
     if message.author == client.user:
         return
 
-    print(message.content)
-    print("-------")
-    print(message.author.bot) #### Github bot = "GitHub#0000"
-
-    global jed_appreciate
-    global ro_troll
+    ### GitHub webhook listener and automatic puller
+    if str(message.author) == "GitHub#0000":
+        print("Incoming update!")
+        await message.channel.send("Updating...")
+        subprocess.run(['./update.sh'])
+        return
 
     if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
         jed_appreciate = jedAppreciate()
