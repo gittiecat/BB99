@@ -50,7 +50,7 @@ async def on_message(message):
 
     print(message)
     print("-------")
-    print(message.bot)
+    print(message.author)
 
     global jed_appreciate
     global ro_troll
