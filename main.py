@@ -1,3 +1,4 @@
+from tasks import TaskClass
 from database import DatabaseClass
 from stats import StatsClass
 import discord
@@ -11,8 +12,13 @@ load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 
+# init client
 client = discord.Client()
 
+# testing cog
+cog = TaskClass()
+
+# get all words and store in variable
 wdb = DatabaseClass()
 all_words = wdb.getAllWords()
 del wdb
@@ -33,6 +39,8 @@ def splitMessage(message):
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    s = client.guilds[0].text_channels[0]
+    await s.send("{0} online and ready to exist!".format((client.user)))
 
 @client.event
 async def on_message(message):
@@ -102,8 +110,8 @@ async def on_message(message):
             await message.add_reaction("<:PogU:784563515716665364>")
             return
 
+        db = DatabaseClass()
         for w in all_words:
-            db = DatabaseClass()
             if w in str(message.content).lower():
                 db.addToCount(w)
         del db
@@ -174,7 +182,7 @@ async def on_message(message):
         help_message += "3) $badwordnew <word> - add a new bad word to the list of bad words!\n"
         help_message += "4) $acc <BattleTag> - to get account info (must be public!)\n"
         help_message += "5) $hi - say hello to me and I'll respond back!\n"
-        help_message += "6) $jed - mute Jed whenever you want if he gets annoying!\n"
+        help_message += "6) $jed - appreciate Jed if he's suddenly nice! <a:monke:837809158392643634>\n"
         help_message += "7) $ro - show Ro his deserved overwatch rank 😈\n"
         await message.channel.send(help_message)
         return
