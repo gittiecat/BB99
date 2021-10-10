@@ -48,9 +48,9 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    print(message)
+    print(message.content)
     print("-------")
-    print(message.author)
+    print(message.author.bot) #### Github bot = "GitHub#0000"
 
     global jed_appreciate
     global ro_troll
