@@ -40,8 +40,12 @@ def splitMessage(message):
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-    s = client.guilds[0].text_channels[0]
-    await s.send("{0} online and fully updated!".format(client.user))
+    s = client.guilds[0].text_channels
+    for i in s:
+        if str(i) == "bot":
+            await i.send("{0} online and fully updated!".format(client.user))
+            return
+    print("Failed to locate channel named 'bot'.")
 
 @client.event
 async def on_message(message):
