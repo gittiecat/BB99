@@ -1,6 +1,7 @@
 # BB99
 Discord bot that does various things
 
+# Instructions
 Clone the repository
 Install Python
 

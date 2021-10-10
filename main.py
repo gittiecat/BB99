@@ -16,7 +16,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 client = discord.Client()
 
 # testing cog
-cog = TaskClass()
+# cog = TaskClass()
 
 # get all words and store in variable
 wdb = DatabaseClass()
@@ -47,6 +47,10 @@ async def on_message(message):
     ### DO NOT MOVE - MUST ALWAYS BE ON TOP
     if message.author == client.user:
         return
+
+    print(message)
+    print("-------")
+    print(message.bot)
 
     global jed_appreciate
     global ro_troll
