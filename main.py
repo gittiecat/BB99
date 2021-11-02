@@ -112,7 +112,7 @@ async def on_message(message):
             await message.author.send("Hey, man! I just want to tell you that we all appreciate you very much and that I really like your dedication for this 'Valheim' game. I hope we play together at some point!")
             return
 
-        num = int(random.random()*50)
+        num = int(random.random()*500)
         if num == 0:
             await message.channel.send("I agree with this statement.")
             return
