@@ -2,4 +2,5 @@
 
 cd /usr/BB99
 git pull
-bb99restart
+systemctl restart bb99.service
+
