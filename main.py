@@ -62,6 +62,7 @@ async def on_message(message):
         print("Incoming update!")
         await message.channel.send("Updating...")
         subprocess.run('sudo ./update.sh', input=os.getenv("password"))
+	await message.channel.send("Finished update!")
         return
 
     if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
