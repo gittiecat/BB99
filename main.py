@@ -8,6 +8,13 @@ from shlex import split
 import os
 from dotenv import load_dotenv
 import subprocess
+import logging
+import platform
+
+LOGFILE_ERROR = 'bot_error.log'
+LOGFILE_ALL = 'bot.log'
+logging.basicConfig(filename=LOGFILE_ERROR, level=logging.ERROR)
+logging.basicConfig(filename=LOGFILE_ALL, level=logging.DEBUG)
 
 load_dotenv()
 
@@ -17,7 +24,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 client = discord.Client()
 
 # testing cog
-# cog = TaskClass()
+cog = TaskClass(client)
 
 # get all words and store in variable
 wdb = DatabaseClass()
@@ -58,10 +65,17 @@ async def on_message(message):
         return
 
     ### GitHub webhook listener and automatic puller
-    if str(message.author) == "GitHub#0000":
-        print("Incoming update!")
-        await message.channel.send("Updating...")
-        subprocess.run(['./update.sh'])
+    if str(message.author) == "GitHub#0000" or message.content.startswith("$lll"):
+        try:
+            if platform.system() == "Windows":
+                print("Cannot run this script on this machine!")
+                return
+            await message.channel.send("Updating...")
+            subprocess.run(['./update.sh'], shell=True)
+            await message.channel.send("Finished update!")
+        except Exception as e:
+            logging.error(e)
+            await message.channel.send("Update has failed - please check the logs for more details.")
         return
 
     if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
