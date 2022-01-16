@@ -24,7 +24,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 client = discord.Client()
 
 # testing cog
-cog = TaskClass(client)
+# cog = TaskClass(client)
 
 # get all words and store in variable
 wdb = DatabaseClass()
