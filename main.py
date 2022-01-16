@@ -11,6 +11,7 @@ import subprocess
 import logging
 import platform
 
+# create these files to enable logging
 LOGFILE_ERROR = 'bot_error.log'
 LOGFILE_ALL = 'bot.log'
 logging.basicConfig(filename=LOGFILE_ERROR, level=logging.ERROR)
@@ -65,7 +66,7 @@ async def on_message(message):
         return
 
     ### GitHub webhook listener and automatic puller
-    if str(message.author) == "GitHub#0000" or message.content.startswith("$lll"):
+    if str(message.author) == "GitHub#0000":
         try:
             if platform.system() == "Windows":
                 print("Cannot run this script on this machine!")
