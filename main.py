@@ -150,6 +150,7 @@ async def on_message(message):
         send = " ".join(params[1:])
         s = client.guilds[0].text_channels[0]
         await s.send(send)
+        await message.delete()
         return
 
     ### EVENT COMMANDS
