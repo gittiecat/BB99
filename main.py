@@ -51,7 +51,8 @@ async def on_ready():
     s = client.guilds[0].text_channels
     for i in s:
         if str(i) == "bot":
-            await i.send("{0} online and feeling poggers!".format((client.user).strip("#")[0]))
+            name = str(client.user).strip("#")[0]
+            await i.send("{0} online and feeling poggers!".format(name))
             return
     print("Failed to locate channel named 'bot'.")
 
