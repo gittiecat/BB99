@@ -71,7 +71,7 @@ async def on_message(message):
             if platform.system() == "Windows":
                 print("Cannot run this script on this machine!")
                 return
-            await message.channel.send("Updating.....")
+            await message.channel.send("Updating...")
             subprocess.run(['/usr/BB99/update.sh'], shell=True)
             await message.channel.send("Finished update!")
         except Exception as e:
