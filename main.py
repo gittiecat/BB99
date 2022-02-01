@@ -72,7 +72,7 @@ async def on_message(message):
                 print("Cannot run this script on this machine!")
                 return
             await message.channel.send("Updating...")
-            subprocess.run(['./update.sh'], shell=True)
+            subprocess.run(['/usr/BB99/update.sh'], shell=True)
             await message.channel.send("Finished update!")
         except Exception as e:
             logging.error(e)
