@@ -3,3 +3,4 @@ jedJSON.json
 test.py
 .env
 *.log
+.cache
