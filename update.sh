@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /usr/BB99
+cd /home/misha/dev/BB99
 git pull
-sudo /bin/systemctl restart bb99.service
+sudo systemctl restart bb99.service
 
