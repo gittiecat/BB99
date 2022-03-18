@@ -155,7 +155,16 @@ async def on_message(message):
         await s.send(send)
         await message.delete()
         return
-
+    
+    ### OVERWATCH ACCOUNT STATS
+    if message.content.startswith('$acc'):
+        params = splitMessage(message)
+        start_time = timer()
+        acc = StatsClass(params[1], message.author)
+        logging.debug(timedelta(seconds=timer()-start_time))
+        await message.channel.send(acc.toMessage())
+    ##########
+    
     ### EVENT COMMANDS
     if message.content.startswith("$event"):
         params = splitMessage(message)
@@ -199,14 +208,7 @@ async def on_message(message):
             await message.channel.send("You have reached limit of bad words.")
     ##########
  
-    ### OVERWATCH ACCOUNT STATS
-    if message.content.startswith('$acc'):
-        params = splitMessage(message)
-        start_time = timer()
-        acc = StatsClass(params[1], message.author)
-        logging.debug(timedelta(seconds=timer()-start_time))
-        await message.channel.send(acc.toMessage())
-    ##########
+    
 
     ### HELP MESSAGE
     if message.content.startswith('$help'):
