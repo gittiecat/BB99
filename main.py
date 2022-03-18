@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 import subprocess
 import logging
 import platform
+from timeit import default_timer as timer
+from datetime import timedelta
 
 # create these files to enable logging
 LOGFILE_ERROR = 'bot_error.log'
@@ -54,7 +56,7 @@ async def on_ready():
             name = str(client.user).split("#")[0]
             await i.send("{0} online and feeling poggers!".format(name))
             return
-    print("Failed to locate channel named 'bot'.")
+    logging.error("Failed to locate channel named 'bot'.")
 
 @client.event
 async def on_message(message):
@@ -70,7 +72,7 @@ async def on_message(message):
     if str(message.author) == "GitHub#0000":
         try:
             if platform.system() == "Windows":
-                print("Cannot run this script on this machine!")
+                logging.error("Cannot run this script on this machine!")
                 return
             await message.channel.send("Updating...")
             subprocess.run(['/home/misha/dev/BB99/update.sh'], shell=True)
@@ -200,7 +202,9 @@ async def on_message(message):
     ### OVERWATCH ACCOUNT STATS
     if message.content.startswith('$acc'):
         params = splitMessage(message)
+        start_time = timer()
         acc = StatsClass(params[1], message.author)
+        logging.debug(timedelta(seconds=timer()-start_time))
         await message.channel.send(acc.toMessage())
     ##########
 
