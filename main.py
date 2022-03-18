@@ -47,7 +47,7 @@ def splitMessage(message):
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    logging.debug('We have logged in as {0.user}'.format(client))
     s = client.guilds[0].text_channels
     for i in s:
         if str(i) == "bot":
