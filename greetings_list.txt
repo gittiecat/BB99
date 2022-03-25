@@ -1,0 +1,15 @@
+Hello, {}!
+Hi, {}!
+Hey, {}!
+Yo, {}!
+What's up, {}!
+Sup, {}!
+Ay yo, {}!
+Hiya, {}!
+Ahoy, {}!
+Ahoj, {}!
+Привет, {}!
+Salut, {}!
+Χαίρετε, {}!
+What's up buttercup, {}!
+Howdy, {}!

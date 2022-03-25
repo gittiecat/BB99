@@ -1,3 +1,4 @@
+from commands import CommandsListener
 from tasks import TaskClass
 from database import DatabaseClass
 from stats import StatsClass
@@ -29,7 +30,6 @@ client = discord.Client()
 # testing cog
 # cog = TaskClass(client)
 
-# get all words and store in variable
 wdb = DatabaseClass()
 all_words = wdb.getAllWords()
 del wdb
@@ -81,7 +81,12 @@ async def on_message(message):
             logging.error(e)
             await message.channel.send("Update has failed - please check the logs for more details.")
         return
+    
+    ### Process commands
+    if message.content.startswith("$"):
+        await CommandsListener.process_commands(message)
 
+    ### COMMAND LISTENERS 
     if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
         jed_appreciate = jedAppreciate()
         if jed_appreciate:
@@ -121,6 +126,14 @@ async def on_message(message):
         elif r == 7:
             await message.add_reaction(emoji="🔥")
         return
+    
+    if message.content.startswith("$s4y"):
+        params = splitMessage(message)
+        send = " ".join(params[1:])
+        s = client.guilds[0].text_channels[0]
+        await s.send(send)
+        await message.delete()
+        return
 
     ### NOT COMMANDS - MONITOR CHAT
     if not message.content.startswith('$'):
@@ -147,14 +160,6 @@ async def on_message(message):
                 db.addToCount(w)
         del db
     ##########
-
-    if message.content.startswith("$s4y"):
-        params = splitMessage(message)
-        send = " ".join(params[1:])
-        s = client.guilds[0].text_channels[0]
-        await s.send(send)
-        await message.delete()
-        return
     
     ### OVERWATCH ACCOUNT STATS
     if message.content.startswith('$acc'):
@@ -207,29 +212,5 @@ async def on_message(message):
         else:
             await message.channel.send("You have reached limit of bad words.")
     ##########
- 
-    
-
-    ### HELP MESSAGE
-    if message.content.startswith('$help'):
-        help_message = "Hi! I am a bot for the **{server}** server!\n".format(server = message.guild)
-        help_message += "1) $help - to get help\n"
-        help_message += "2) $badwordstats <no. top(optional)> - get the stats on the top bad words of the server!\n"
-        help_message += "3) $badwordnew <word> - add a new bad word to the list of bad words!\n"
-        help_message += "4) $acc <BattleTag> - to get account info (must be public!)\n"
-        help_message += "5) $hi - say hello to me and I'll respond back!\n"
-        help_message += "6) $jed - appreciate Jed if he's suddenly nice! <a:monke:837809158392643634>\n"
-        help_message += "7) $ro - show Ro his deserved overwatch rank 😈\n"
-        await message.channel.send(help_message)
-        return
-    ########## EASY TO READ FORMAT
-
-    ### SAY HELLO TO MESSAGE AUTHOR
-    if message.content.startswith('$hi'):
-        send = 'Hello, ' + str(message.author) + '!'
-        await message.channel.send(send)
-        return
-    ##########
-
 
 client.run(TOKEN)
