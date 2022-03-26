@@ -1,10 +1,9 @@
-import sqlite3 as sl
+import sqlite3 as sql
 
 class DatabaseClass:
     def __init__(self):
-        self.con = sl.connect('discord-server.db')
+        self.con = sql.connect('discord-server.db')
         self.cursor = self.con.cursor()
-        DatabaseClass.createDatabase(self)
 
     def createDatabase(self):
         # CREATE DATABASE IF DOESN'T EXIST
@@ -18,6 +17,11 @@ class DatabaseClass:
                 word TEXT,
                 count INTEGER
                 );""")
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS switches
+                (switch TEXT,
+                status INTEGER
+                );""")
+        self.con.commit()
     
     ### FUNCTIONS FOR OVERWATCH BATTLETAGS
     def insertNewAccount(self,user,account):
@@ -29,6 +33,14 @@ class DatabaseClass:
         # RETURN BOOL FOR IF ACCOUNT EXISTS IN DB
         self.cursor.execute("SELECT account FROM accounts WHERE account=(?)", (account,))
         return not not self.cursor.fetchall()
+
+    def checkSwitches(self, switch):
+        self.cursor.execute("SELECT status FROM switches WHERE switch=(?)", (switch,))
+        return self.cursor.fetchall()
+
+    def reverseSwitch(self, update, switch):
+        self.cursor.execute("UPDATE switches SET status = {} WHERE switch=\"{}\"".format(update, switch))
+        self.con.commit()
 
     ### FUNCTION FOR COUNTING BAD WORDS
     def checkIfWordExists(self, word):

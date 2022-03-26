@@ -1,9 +1,15 @@
 import random
+from database import DatabaseClass
+from stats import StatsClass
+
+
+error_emoji = "\U0001F6B1"
 
 class CommandsListener:
     @classmethod
-    async def process_commands(cls, message):
+    async def process_commands(cls, message, client):
         self = CommandsListener()
+        self.client = client
         self.message = message
         msg_array = message.content.split(" ")
         self.base_command = msg_array[0]
@@ -17,6 +23,12 @@ async def processor(self):
             await com_hi(self)
         case "$help":
             await com_help(self)
+        case "$acc":
+            await com_acc(self)
+        case "$jed":
+            await com_jed(self)
+        case "$ro":
+            await com_ro(self)
         case _:
             await com_help(self, True)
 
@@ -40,3 +52,41 @@ async def com_help(self, err=False):
         mod_string = str(idx) + ") " + commands + "\n"
         help_message += mod_string
     await self.message.channel.send(help_message)
+
+async def com_acc(self):
+    if not self.param_command:
+        await self.message.add_reaction(error_emoji)
+        return
+    params = self.param_command[0]
+    acc = StatsClass(params, self.message.author)
+    response = acc.toMessage()
+    if response == 404:
+        await self.message.add_reaction(error_emoji)
+        return
+    await self.message.channel.send(acc.toMessage())
+
+async def com_jed(self):
+    if str(self.message.author) == "Jed#4434":
+        return
+    db = DatabaseClass()
+    switch = db.checkSwitches("jed_appreciate")[0][0]
+    reverse = (switch+1)%2
+    db.reverseSwitch(reverse, "jed_appreciate")
+    if reverse == 1:
+        await self.message.add_reaction("💙")
+    else:
+        await self.message.add_reaction("💔")
+
+async def com_ro(self):
+    if str(self.message.author) == "Stokey™#9852":
+        return
+    db = DatabaseClass()
+    switch = db.checkSwitches("ro_troll")[0][0]
+    reverse = (switch+1)%2
+    db.reverseSwitch(reverse, "ro_troll")
+    if reverse == 1:
+        await self.message.add_reaction("😈")
+    else:
+        await self.message.add_reaction("😇")
+
+

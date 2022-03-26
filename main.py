@@ -14,7 +14,6 @@ import platform
 from timeit import default_timer as timer
 from datetime import timedelta
 
-# create these files to enable logging
 LOGFILE_ERROR = 'bot_error.log'
 LOGFILE_ALL = 'bot.log'
 logging.basicConfig(filename=LOGFILE_ERROR, level=logging.ERROR)
@@ -26,9 +25,6 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 
 # init client
 client = discord.Client()
-
-# testing cog
-# cog = TaskClass(client)
 
 wdb = DatabaseClass()
 all_words = wdb.getAllWords()
@@ -61,7 +57,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # set global variables for this method
-    global jed_appreciate
     global ro_troll
 
     ### DO NOT MOVE - MUST ALWAYS BE ON TOP
@@ -84,30 +79,14 @@ async def on_message(message):
     
     ### Process commands
     if message.content.startswith("$"):
-        await CommandsListener.process_commands(message)
+        await CommandsListener.process_commands(message, client)
 
-    ### COMMAND LISTENERS 
-    if message.content.startswith("$jed") and not str(message.author) == "Jed#4434":
-        jed_appreciate = jedAppreciate()
-        if jed_appreciate:
-            await message.add_reaction(emoji="💙")
-            await message.channel.send("We are now appreciating Jed!")
-        else:
-            await message.add_reaction(emoji="💔")
-        return
-
-    if message.content.startswith("$ro") and not str(message.author) == "Stokey™#9852":
-        ro_troll = roTroll()
-        if ro_troll:
-            await message.add_reaction(emoji="😈")
-        else:
-            await message.add_reaction(emoji="😇")
-        return
-
-    if str(message.author) == "Stokey™#9852" and ro_troll:
+    if str(message.author) == "Stokey™#9852" and \
+                        not not DatabaseClass().checkSwitches("ro_troll")[0][0]:
         await message.add_reaction(emoji = "<:bronzerank:890252007468838984>")
 
-    if str(message.author) == "Jed#4434" and jed_appreciate:
+    if str(message.author) == "Jed#4434" and \
+                        not not DatabaseClass().checkSwitches("jed_appreciate")[0][0]:
         r = int(random.random()*30)
         if r == 0:
             await message.channel.send("I'm with you 100%!")
@@ -159,15 +138,6 @@ async def on_message(message):
             if w in str(message.content).lower():
                 db.addToCount(w)
         del db
-    ##########
-    
-    ### OVERWATCH ACCOUNT STATS
-    if message.content.startswith('$acc'):
-        params = splitMessage(message)
-        start_time = timer()
-        acc = StatsClass(params[1], message.author)
-        logging.debug(timedelta(seconds=timer()-start_time))
-        await message.channel.send(acc.toMessage())
     ##########
     
     ### EVENT COMMANDS

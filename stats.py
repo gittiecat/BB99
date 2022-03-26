@@ -43,7 +43,7 @@ class StatsClass:
         if self.private == True:
             send = send + "This account is **private**!\n*(If you have recently made this profile public, please allow some time for the update to go through.)*"
         elif not self.roles:
-            send = send + "No currently recorded stats!\n"
+            send = 404
         else:
             for l in self.roles:
                 send = send + ' '.join(l) + "\n"
