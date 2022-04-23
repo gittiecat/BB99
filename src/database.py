@@ -4,7 +4,7 @@ class DatabaseClass:
     def __init__(self):
         self.con = sql.connect('../resources/db/discord-server.db')
         self.cursor = self.con.cursor()
-        self.createDatabase(self)
+        self.createDatabase()
 
     def createDatabase(self):
         # CREATE DATABASE IF DOESN'T EXIST
