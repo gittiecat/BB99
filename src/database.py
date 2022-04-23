@@ -4,6 +4,7 @@ class DatabaseClass:
     def __init__(self):
         self.con = sql.connect('../resources/db/discord-server.db')
         self.cursor = self.con.cursor()
+        self.createDatabase(self)
 
     def createDatabase(self):
         # CREATE DATABASE IF DOESN'T EXIST
@@ -21,6 +22,11 @@ class DatabaseClass:
                 (switch TEXT,
                 status INTEGER
                 );""")
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS confirmation
+                (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                user TEXT,
+                command TEXT
+                );""")
         self.con.commit()
     
     ### FUNCTIONS FOR OVERWATCH BATTLETAGS
@@ -34,12 +40,26 @@ class DatabaseClass:
         self.cursor.execute("SELECT account FROM accounts WHERE account=(?)", (account,))
         return not not self.cursor.fetchall()
 
+    ### SWITCHES
     def checkSwitches(self, switch):
         self.cursor.execute("SELECT status FROM switches WHERE switch=(?)", (switch,))
         return self.cursor.fetchall()
 
     def reverseSwitch(self, update, switch):
         self.cursor.execute("UPDATE switches SET status = {} WHERE switch=\"{}\"".format(update, switch))
+        self.con.commit()
+
+    ### VALHEIM REQUESTS
+    def createCommandRequest(self, user, command):
+        self.cursor.execute("INSERT INTO confirmation (user, command) VALUES (?, ?);", (user, command))
+        self.con.commit()
+    
+    def checkCommandRequest(self, user, command):
+        self.cursor.execute("SELECT * FROM confirmation WHERE user=\"{}\" AND command=\"{}\";".format(user, command))
+        return not not self.cursor.fetchall()
+
+    def removeCommandRequest(self, user):
+        self.cursor.execute("DELETE FROM confirmation WHERE user=\"{}\";".format(user))
         self.con.commit()
 
     ### FUNCTION FOR COUNTING BAD WORDS

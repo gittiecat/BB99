@@ -1,6 +1,7 @@
 import random
 from database import DatabaseClass
 from stats import StatsClass
+from valheim import ValheimClass
 
 
 error_emoji = "\U0001F6B1"
@@ -92,4 +93,10 @@ async def com_ro(self):
         await self.message.add_reaction("😇")
 
 async def com_valheim(self):
-    print(self.param_command)
+    command = self.param_command[0]
+    user = str(self.message.author)
+    if command in ["start", "restart"]:
+        db = DatabaseClass()
+        db.removeCommandRequest(user)
+        valheim = db.createCommandRequest(user, command)
+
