@@ -1,4 +1,6 @@
+import asyncio
 from commands import CommandsListener
+from spongebob import SpongebobClass
 from tasks import TaskClass
 from database import DatabaseClass
 from stats import StatsClass
@@ -173,5 +175,18 @@ async def on_message(message):
         else:
             await message.channel.send("You have reached limit of bad words.")
     ##########
+
+    ####### SPONGEBOB
+    def check(reaction, user):
+        return str(reaction) == "<:SpongebobMock:967748225199136808>"
+
+    try:
+        await client.wait_for('reaction_add', timeout=120.0, check=check)
+    except asyncio.TimeoutError:
+        print("Something failed at asyncio level")
+    else:
+        spngbob = SpongebobClass().spongebob_format(message.content)
+        await message.channel.send(spngbob)
+    #######
 
 client.run(TOKEN)

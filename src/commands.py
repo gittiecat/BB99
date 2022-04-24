@@ -95,8 +95,11 @@ async def com_ro(self):
 async def com_valheim(self):
     command = self.param_command[0]
     user = str(self.message.author)
-    if command in ["start", "restart"]:
-        db = DatabaseClass()
-        db.removeCommandRequest(user)
-        valheim = db.createCommandRequest(user, command)
+    if command in ["start", "restart", "status"]:
+        val = ValheimClass(command)
+        response = val.response
+        await self.message.channel.send(response)
+        # db = DatabaseClass()
+        # db.removeCommandRequest(user)
+        # valheim = db.createCommandRequest(user, command)
 
