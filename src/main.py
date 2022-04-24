@@ -179,13 +179,12 @@ async def on_message(message):
 
     ####### SPONGEBOB
     def check(reaction, user):
-        print(reaction)
-        return str(reaction) == "<:SpongebobMock:967758071847845948>"
+        return reaction.emoji.name == "SpongebobMock"
 
     try:
         await client.wait_for('reaction_add', timeout=60.0, check=check)
     except asyncio.TimeoutError:
-        print("Something failed at asyncio level")
+        print("Timer ran out")
     else:
         spngbob = SpongebobClass().spongebob_format(message.content)
         await message.channel.send(spngbob)
