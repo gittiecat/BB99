@@ -82,6 +82,7 @@ async def on_message(message):
     ### Process commands
     if message.content.startswith("$"):
         await CommandsListener.process_commands(message, client)
+        return
     
     ### NOT COMMANDS - MONITOR CHAT
     if str(message.author) == "Stokey™#9852" and \
@@ -181,7 +182,7 @@ async def on_message(message):
         return str(reaction) == "<:SpongebobMock:967748225199136808>"
 
     try:
-        await client.wait_for('reaction_add', timeout=120.0, check=check)
+        await client.wait_for('reaction_add', timeout=60.0, check=check)
     except asyncio.TimeoutError:
         print("Something failed at asyncio level")
     else:
