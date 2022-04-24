@@ -179,7 +179,7 @@ async def on_message(message):
 
     ####### SPONGEBOB
     def check(reaction, user):
-        return str(reaction) == "<:SpongebobMock:967748225199136808>"
+        return str(reaction) == "<:SpongebobMock:967758071847845948>"
 
     try:
         await client.wait_for('reaction_add', timeout=60.0, check=check)
