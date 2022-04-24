@@ -47,7 +47,7 @@ async def com_help(self, err=False):
     if err == True:
         help_message = "This command does not exist! \"$help\" provides a list all available commands.\n---\n"
     else:
-        help_message += "Hi! I am a bot for the **{server}** server!\n".format(server = self.message.guild)
+        help_message = "Hi! I am a bot for the **{server}** server!\n".format(server = self.message.guild)
     help_file = open("../resources/help_list.txt", "r", encoding="utf8") # read help messages from file
     help_list = help_file.read().split("\n")
     
