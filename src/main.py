@@ -182,7 +182,7 @@ async def on_message(message):
         return reaction.emoji.name == "SpongebobMock"
 
     try:
-        await client.wait_for('reaction_add', timeout=60.0, check=check)
+        await client.wait_for('reaction_add', timeout=180.0, check=check)
     except asyncio.TimeoutError:
         print("Timer ran out")
     else:
