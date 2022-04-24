@@ -179,6 +179,7 @@ async def on_message(message):
 
     ####### SPONGEBOB
     def check(reaction, user):
+        print(reaction)
         return str(reaction) == "<:SpongebobMock:967758071847845948>"
 
     try:
