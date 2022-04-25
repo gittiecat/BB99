@@ -179,7 +179,7 @@ async def on_message(message):
 
     ####### SPONGEBOB
     def check(reaction, user):
-        return user == message.author and reaction.emoji.name == "SpongebobMock"
+        return reaction.emoji.name == "SpongebobMock"
 
     try:
         await client.wait_for('reaction_add', timeout=180.0, check=check)
