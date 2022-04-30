@@ -15,9 +15,10 @@ import logging
 import platform
 from timeit import default_timer as timer
 from datetime import timedelta
+import os.path
 
-LOGFILE_ERROR = '../resources/log/bot_error.log'
-LOGFILE_ALL = '../resources/log/bot.log'
+LOGFILE_ERROR = 'resources/log/bot_error.log'
+LOGFILE_ALL = 'resources/log/bot.log'
 logging.basicConfig(filename=LOGFILE_ERROR, level=logging.ERROR)
 logging.basicConfig(filename=LOGFILE_ALL, level=logging.DEBUG)
 

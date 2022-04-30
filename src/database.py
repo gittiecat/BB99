@@ -2,7 +2,7 @@ import sqlite3 as sql
 
 class DatabaseClass:
     def __init__(self):
-        self.con = sql.connect('../resources/db/discord-server.db')
+        self.con = sql.connect('resources/db/discord-server.db')
         self.cursor = self.con.cursor()
         self.createDatabase()
 
