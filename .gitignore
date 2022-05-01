@@ -3,5 +3,4 @@ __pycache__
 jedJSON.json
 test.py
 .env
-*.log
 .cache
