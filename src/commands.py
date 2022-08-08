@@ -38,6 +38,7 @@ async def processor(self):
             await com_help(self, True)
 
 async def com_bored(self):
+    print("Entered!!!!!!")
     isAuthor = str(self.message.author) == "strööp#6969"
     if not isAuthor:
         return
