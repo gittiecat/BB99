@@ -43,6 +43,7 @@ async def com_bored(self):
     if not isAuthor:
         return
     db = DatabaseClass()
+    print(db.checkSwitches)
     switch = db.checkSwitches("bored")[0][0]
     reverse = (switch+1)%2
     db.reverseSwitch(reverse, "bored")
