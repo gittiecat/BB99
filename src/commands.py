@@ -32,8 +32,24 @@ async def processor(self):
             await com_ro(self)
         case "$valheim":
             await com_valheim(self)
+        case "$bored":
+            await com_bored(self)
         case _:
             await com_help(self, True)
+
+async def com_bored(self):
+    isAuthor = str(self.message.author) == "strööp#6969"
+    if not isAuthor:
+        return
+    db = DatabaseClass()
+    switch = db.checkSwitches("bored")[0][0]
+    reverse = (switch+1)%2
+    db.reverseSwitch(reverse, "bored")
+    if reverse == 1:
+        await self.message.add_reaction("💢")
+    else:
+        await self.message.add_reaction("😒")
+
 
 async def com_hi(self):
     author = self.message.author.mention
