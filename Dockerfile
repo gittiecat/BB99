@@ -5,4 +5,4 @@ RUN git clone https://github.com/gittiecat/BB99.git .
 
 RUN pip install -r /app/resources/requirements.txt
 
-CMD [ "python", "src/main.py"]
+CMD [ "python", "-u", "src/main.py"]
