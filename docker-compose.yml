@@ -6,3 +6,4 @@ services:
     container_name: bb99
     volumes:
       - .env:/app/.env
+      - resources/db/discord-server.db:/app/resources/db/discord-server.db

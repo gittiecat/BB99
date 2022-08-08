@@ -86,10 +86,8 @@ async def on_message(message):
         return
     
     ### NOT COMMANDS - MONITOR CHAT
-    print("checking author")
     if str(message.author) != "strööp#6969" and \
                         not not DatabaseClass().checkSwitches("bored")[0][0]:
-            print("checked author - success!")
             await message.channel.send("?")
 
     if str(message.author) == "Stokey™#9852" and \
