@@ -1,1 +1,238 @@
 
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 63aab98b20ced29779acb8b3d9b977e1).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 0d32ef0efbeebeeb42907e1419cea7c1).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 36f48e80f23bd4016a0cb15f697509a2).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: b4f4988341e82462f38ad9dd3d982868).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: df7e538c4de578a450cc7c5d1c15661a).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: f5431c4d06d544d20ee065d0d22058df).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 95a334058b89692f5c66b9d738a1ca49).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 85, in on_message
+    await ChatMonitoring.chat_monitor(message)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 11, in chat_monitor
+    self.response = await createResponse(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 36, in createResponse
+    await randomOpinion(message)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 68, in randomOpinion
+    num = int(random.random()*500)
+AttributeError: 'builtin_function_or_method' object has no attribute 'random'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 6aaf451a1a4d3475847b2a56715cfc3f).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 3a401ba5834929a21984fd3c96fdac41).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 85, in on_message
+    await ChatMonitoring.chat_monitor(message)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 12, in chat_monitor
+    self.response = await createResponse(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 37, in createResponse
+    asyncio.run(randomOpinion(message))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2544.0_x64__qbz5n2kfra8p0\lib\asyncio\runners.py", line 33, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 02709e90e04af10ca5de3609205da7a5).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 85, in on_message
+    await ChatMonitoring.chat_monitor(message)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 11, in chat_monitor
+    self.response = await createResponse(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\chat_monitoring.py", line 43, in createResponse
+    num = int(random.random()*500)
+AttributeError: 'builtin_function_or_method' object has no attribute 'random'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 9ff6dbc58362a60d919e733091655e4a).
+ERROR:asyncio:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001868263CF40>
+ERROR:asyncio:Fatal error on SSL transport
+protocol: <asyncio.sslproto.SSLProtocol object at 0x0000018682688DF0>
+transport: <_ProactorSocketTransport fd=1376 read=<_OverlappedFuture cancelled>>
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2544.0_x64__qbz5n2kfra8p0\lib\asyncio\sslproto.py", line 690, in _process_write_backlog
+    self._transport.write(chunk)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2544.0_x64__qbz5n2kfra8p0\lib\asyncio\proactor_events.py", line 365, in write
+    self._loop_writing(data=bytes(data))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2544.0_x64__qbz5n2kfra8p0\lib\asyncio\proactor_events.py", line 401, in _loop_writing
+    self._write_fut = self._loop._proactor.send(self._sock, data)
+AttributeError: 'NoneType' object has no attribute 'send'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: b43ab116c6c87bd3b6e93943a80b3561).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 62c3fc53cc610ded53fa81743c32fb15).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 34c6edb4406f78e4a3c35b291a059978).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 07830762c038aeeaf3f929ee1d9390e0).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: c9d121e4c06f9f73f48f89248f498b0a).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 745c06bf617b6160547550d84141eada).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 81, in on_message
+    print(message.content.startswith("$") + " : " + message.content)
+TypeError: unsupported operand type(s) for +: 'bool' and 'str'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 8124e81746cdb304675c19bd31a4ca08).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 0cfc5d2283e435506e1e145f47ff1bca).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: bcf3024f70306ea7bbe1f9b509c94784).
+INFO:discord.client:logging in using static token
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 5e83b82b7882e38e92e45779b6d8b85c).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 3d58f38420b32b7f3b0a1c0bb7a08a83).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 6d04199a47d343065f5d8bc1e20bdfd9).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 65cc62aba3aaca5410f98fd83e9649a5).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: c0e38adff48952b7db3959a4915bc626).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: d71272b6cb8b63f57505c389fac570ef).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 19d3b355fc9f571a8950905f21739dd0).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: f82efec83eba9f3c10a1694fcb437cf4).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: b3137e764ad4d2c1a5a351352a2a8366).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 43a38fddc3e21da0ff25962abb069747).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: afb9398399f15a4f8e757c159984198f).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 29e289a6ffc62b16ba0475a0af73bdd6).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 44b6dee28142ea0bfb71d09bbd15f57a).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: e0e1157699799cf8dfc63c4d23ef0f11).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 08b9e72eae05c796156445948cf59a6a).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 82, in on_message
+    await CommandsListener.process_commands(message, client)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 21, in process_commands
+    self.response = await processor(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 45, in processor
+    await com_generate(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 50, in com_generate
+    print(splitMessage(self.message.content))
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 136, in splitMessage
+    split_message = split(message.content)
+AttributeError: 'str' object has no attribute 'content'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: eaadff63f4677be671ac5307c5d32c50).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: b6bddda810eb07040812c953fe49bb75).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 1762a4fbe8cc8e6c148bc6ead822d4e2).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 82, in on_message
+    await CommandsListener.process_commands(message, client)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 21, in process_commands
+    self.response = await processor(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 45, in processor
+    await com_generate(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 50, in com_generate
+    print(self.message.replace("$generate ", ""))
+AttributeError: 'Message' object has no attribute 'replace'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: c441fe1754ab625a79383763ea641a25).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 813652d43809a8f0066d48ea7bc17549).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 7b712261bdf16799c7d2e7c5c1098473).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: db6d6e3a1f220e9d2ffeaee9a33a237f).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 8f5a56ab719bf0518381c10c08e1377b).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 0fe78cbe7cc30b77521a11485f5964b3).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 9480aec8e9552b7d89583d534bb0df99).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 82, in on_message
+    await CommandsListener.process_commands(message, client)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 21, in process_commands
+    self.response = await processor(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 45, in processor
+    await com_generate(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 50, in com_generate
+    print(type(self.message.content).replace("$generate ", ""))
+TypeError: replace expected at least 2 arguments, got 1
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 4ec286f75f3e4470f807b271395cdda5).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: a8ac6852062482738785610ae701776c).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 78694cee6e2109c6388402a7cc9c007e).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: fa5ebbb75a32cef318799bc9390bb7db).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 82, in on_message
+    await CommandsListener.process_commands(message, client)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 22, in process_commands
+    self.response = await processor(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 46, in processor
+    await com_generate(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 54, in com_generate
+    print(json.loads(response))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2544.0_x64__qbz5n2kfra8p0\lib\json\__init__.py", line 339, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+TypeError: the JSON object must be str, bytes or bytearray, not OpenAIObject
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: cfd31cf3a13da2a8d9926f3f2bfbaa9b).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 45dc10507bd03d804f2a2137239e4a9c).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 0c98fc2855a149a765432b892fa4781d).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 0e9ac8e783482f09525ae26a171aad27).
+ERROR:discord.client:Ignoring exception in on_message
+Traceback (most recent call last):
+  File "C:\Users\igor\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\main.py", line 82, in on_message
+    await CommandsListener.process_commands(message, client)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 22, in process_commands
+    self.response = await processor(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 46, in processor
+    await com_generate(self)
+  File "C:\Users\igor\Desktop\Michael\discordBots\BB99\src\commands.py", line 55, in com_generate
+    print(json_response.dumps("data"))
+AttributeError: 'dict' object has no attribute 'dumps'
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: 3c695694359daf17b4a9d92e88eba362).
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: ed651e8ccfc4033d2542d2c44f9c7f9e).

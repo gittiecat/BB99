@@ -1,4 +1,5 @@
 import asyncio
+from chat_monitoring import ChatMonitoring
 from commands import CommandsListener
 from spongebob import SpongebobClass
 from tasks import TaskClass
@@ -27,7 +28,7 @@ load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 # init client
-client = discord.Client()
+client = discord.Client(intents=discord.Intents.all())
 
 wdb = DatabaseClass()
 all_words = wdb.getAllWords()
@@ -41,10 +42,6 @@ def jedAppreciate():
 
 def roTroll():
     return not ro_troll
-
-def splitMessage(message):
-    split_message = split(message.content)
-    return split_message
 
 @client.event
 async def on_ready():
@@ -73,7 +70,7 @@ async def on_message(message):
                 logging.error("Cannot run this script on this machine!")
                 return
             await message.channel.send("Updating...")
-            subprocess.run(['/home/misha/dev/BB99/resources/scripts/update.sh'], shell=True)
+            subprocess.run(['${os.getenv("UPDATE_SCRIPT_PATH")}/resources/scripts/update.sh'], shell=True)
             await message.channel.send("Finished update!")
         except Exception as e:
             logging.error(e)
@@ -84,107 +81,11 @@ async def on_message(message):
     if message.content.startswith("$"):
         await CommandsListener.process_commands(message, client)
         return
-    
-    ### NOT COMMANDS - MONITOR CHAT
-    if str(message.author) != "strööp#6969" and \
-                        not not DatabaseClass().checkSwitches("bored")[0][0]:
-        await message.channel.send("?")
-        await message.add_reaction("❓")
-
-    if str(message.author) == "Stokey™#9852" and \
-                        not not DatabaseClass().checkSwitches("ro_troll")[0][0]:
-        await message.add_reaction(emoji = "<:bronzerank:890252007468838984>")
-
-    if str(message.author) == "Jed#4434" and \
-                        not not DatabaseClass().checkSwitches("jed_appreciate")[0][0]:
-        r = int(random.random()*30)
-        if r == 0:
-            await message.channel.send("I'm with you 100%!")
-        elif r == 1:
-            await message.channel.send("That's a very good point, Jed.")
-        elif r == 2:
-            await message.channel.send("Hey, I think we should all play Valheim some day.")
-        elif r == 3:
-            await message.channel.send("Sending you lots of love and kisses 💙")
-        elif r == 4:
-            await message.add_reaction(emoji="🙌")
-        elif r == 5:
-            await message.add_reaction(emoji="😍")
-        elif r == 6:
-            await message.add_reaction(emoji="💯")
-        elif r == 7:
-            await message.add_reaction(emoji="🔥")
-        return
-
-    if not message.content.startswith('$'):
-        if str(message.author) == "Jed#4434" and ("valheim" in str(message.content).lower()):
-            await message.add_reaction(emoji="❤")
-            await message.channel.send("Buy the game here: https://store.steampowered.com/app/892970/Valheim/")
-            return
-
-        num = int(random.random()*500)
-        if num == 0:
-            await message.channel.send("I agree with this statement.")
-            return
-        if num == 1:
-            await message.channel.send("I respect your opinion but I have to disagree.")
-            return
-        elif 'pog' in str(message.content).lower():
-            await message.add_reaction("<:PogU:784563515716665364>")
-            return
-
-        db = DatabaseClass()
-        for w in all_words:
-            if w in str(message.content).lower():
-                db.addToCount(w)
-        del db
-    ##########
-    
-    ### EVENT COMMANDS
-    if message.content.startswith("$event"):
-        params = splitMessage(message)
-        if (len(params) < 4):
-            await message.add_reaction("👎")
-            return
-        category = params[1]
-        # date parser
-        date = params[2]
-        print(date.split("/")[2])
-        try:
-            if (date == "today"):
-                date = datetime.today().strftime("%d/%m/%y")
-            else:
-                date = datetime.strptime(date,"%d/%m/%y")
-        except ValueError as err:
-            print(err)
-        time = params[3]
-        comments = " ".join(params[4:])
-        print(comments)
-    ##########
-
-    ### BAD WORDS COMMANDS
-    if message.content.startswith("$badwordstats"):
-        params = splitMessage(message)
-        if (len(params) == 2 and params[1].isnumeric()):
-            num_top = params[1]
-        else:
-            num_top = 3
-        db = DatabaseClass()
-        await message.channel.send(db.getTopWords(num_top))
-
-    if message.content.startswith('$badwordnew'):
-        if (len(all_words) < 25):
-            params = splitMessage(message)
-            db = DatabaseClass()
-            db.addNewWord(params[1])
-            all_words.append(params[1])
-            await message.add_reaction("<a:Clap:788103361622179901>")
-        else:
-            await message.channel.send("You have reached limit of bad words.")
-    ##########
+    else: ### Chat monitoring
+        await ChatMonitoring.chat_monitor(message)
 
     ####### SPONGEBOB
-    def check(reaction, user):
+    def check(reaction):
         return reaction.emoji.name == "SpongebobMock"
 
     try:

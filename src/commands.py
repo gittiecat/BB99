@@ -1,7 +1,11 @@
+import json
 import random
 from database import DatabaseClass
+from openai_impl.dalle2 import GenDallE2
+# from openai_impl.dalle2 import GenDallE2
 from stats import StatsClass
 from valheim import ValheimClass
+from shlex import split
 
 
 error_emoji = "\U0001F6B1"
@@ -34,9 +38,23 @@ async def processor(self):
             await com_valheim(self)
         case "$bored":
             await com_bored(self)
+        case "$badwordstats":
+            await com_bw_stats(self)
+        case "$badwordnew":
+            await com_bw_new(self)
+        case "$generate":
+            await com_generate(self)
         case _:
             await com_help(self, True)
 
+async def com_generate(self):
+    input = (self.message.content).replace("$generate ", "")
+    gen = GenDallE2()
+    response = gen.generate(input)
+    json_response = json.loads(str(response))
+    url = json_response.get("data")[0].get("url")
+    await self.message.channel.send(url)
+    
 async def com_bored(self):
     isAuthor = str(self.message.author) == "strööp#6969"
     if not isAuthor:
@@ -49,7 +67,6 @@ async def com_bored(self):
         await self.message.add_reaction("💢")
     else:
         await self.message.add_reaction("😒")
-
 
 async def com_hi(self):
     author = self.message.author.mention
@@ -73,16 +90,18 @@ async def com_help(self, err=False):
     await self.message.channel.send(help_message)
 
 async def com_acc(self):
-    if not self.param_command:
-        await self.message.add_reaction(error_emoji)
-        return
-    params = self.param_command[0]
-    acc = StatsClass(params, self.message.author)
-    response = acc.toMessage()
-    if response == 404:
-        await self.message.add_reaction(error_emoji)
-        return
-    await self.message.channel.send(acc.toMessage())
+    # if not self.param_command:
+    #     await self.message.add_reaction(error_emoji)
+    #     return
+    # params = self.param_command[0]
+    # acc = StatsClass(params, self.message.author)
+    # response = acc.toMessage()
+    # if response == 404:
+    #     await self.message.add_reaction(error_emoji)
+    #     return
+    # await self.message.channel.send(acc.toMessage())
+    await self.message.channel.send("This functionality has been temporarily disabled until Blizzard fix their bloody api")
+    return
 
 async def com_jed(self):
     if str(self.message.author) == "Jed#4434":
@@ -115,7 +134,28 @@ async def com_valheim(self):
         val = ValheimClass(command)
         response = val.response
         await self.message.channel.send(response)
-        # db = DatabaseClass()
-        # db.removeCommandRequest(user)
-        # valheim = db.createCommandRequest(user, command)
+
+def splitMessage(message):
+        split_message = split(message.content)
+        return split_message
+
+async def com_bw_stats(self):
+    params = splitMessage(self.message)
+    if (len(params) == 2 and params[1].isnumeric()):
+        num_top = params[1]
+    else:
+        num_top = 3
+    db = DatabaseClass()
+    await self.message.channel.send(db.getTopWords(num_top))
+
+async def com_bw_new(self):
+    db = DatabaseClass()
+    all_words = db.getAllWords()
+    if (len(all_words) < 25):
+        params = splitMessage(self.message)
+        db.addNewWord(params[1])
+        all_words.append(params[1])
+        await self.message.add_reaction("<a:Clap:788103361622179901>")
+    else:
+        await self.message.channel.send("You have reached limit of bad words.")
 
