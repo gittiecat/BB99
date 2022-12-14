@@ -11,7 +11,7 @@ class GenDallE2():
     def __init__(self):
         self.key = os.getenv("OPEN_AI_API_KEY")
     
-    def generate(self, input, res=Size.SMALL.value):
+    def generate(self, input, res=Size.MEDIUM.value):
         openai.api_key = self.key
         return openai.Image.create(
             prompt=input,

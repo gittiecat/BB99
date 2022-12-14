@@ -49,6 +49,7 @@ async def processor(self):
 
 async def com_generate(self):
     input = (self.message.content).replace("$generate ", "")
+    
     gen = GenDallE2()
     response = gen.generate(input)
     json_response = json.loads(str(response))
