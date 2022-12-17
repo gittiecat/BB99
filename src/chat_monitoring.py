@@ -1,5 +1,6 @@
 
 import random
+from openai_impl.moderation import ModerationClass
 from util.database import DatabaseClass
 
 
@@ -12,6 +13,16 @@ class ChatMonitoring:
 
 async def createResponse(self):
     message = self.message
+    #openai moderation
+    mod = ModerationClass()
+    results = mod.moderate_message(message.content)
+    flagged_types = mod.get_types(results)
+    if not not flagged_types:
+        string = ', '.join(flagged_types)
+        result = f"OpenAI: *detected {string}*\nDo you need help?"
+        await message.channel.send(result)
+    ###
+
     if str(message.author) != "strööp#6969" and \
                     not not DatabaseClass().checkSwitches("bored")[0][0]:
         await message.channel.send("?")

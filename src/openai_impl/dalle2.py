@@ -7,7 +7,7 @@ class Size(Enum):
     MEDIUM="512x512"
     LARGE="1024x1024"
 
-class GenDallE2():
+class GenDallE2Class():
     def __init__(self):
         self.key = os.getenv("OPEN_AI_API_KEY")
     

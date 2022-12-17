@@ -1,7 +1,7 @@
 import discord
 from util.database import DatabaseClass
 from image_processor import ImageProcessor
-from openai_impl.dalle2 import GenDallE2
+from openai_impl.dalle2 import GenDallE2Class
 from valheim import ValheimClass
 from shlex import split
 import re
@@ -64,7 +64,7 @@ async def com_generate(self):
     prompt_word_list = [word for word in remove_command.split() if word.lower() not in command_list]
     prompt = ' '.join(prompt_word_list)
     
-    gen = GenDallE2()
+    gen = GenDallE2Class()
     response = gen.generate(prompt, size, num)
     if isinstance(response, str):
         await self.message.channel.send("OpenAI: *" + response + "*")

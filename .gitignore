@@ -4,5 +4,5 @@ jedJSON.json
 test.py
 .env
 .cache
-resources/log/*
-resources/tmp/*
+**/log
+**/tmp
