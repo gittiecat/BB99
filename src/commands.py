@@ -1,11 +1,10 @@
-import json
-import random
+import discord
 from database import DatabaseClass
+from image_processor import ImageProcessor
 from openai_impl.dalle2 import GenDallE2
-# from openai_impl.dalle2 import GenDallE2
-from stats import StatsClass
 from valheim import ValheimClass
 from shlex import split
+import re
 
 
 error_emoji = "\U0001F6B1"
@@ -48,13 +47,32 @@ async def processor(self):
             await com_help(self, True)
 
 async def com_generate(self):
-    input = (self.message.content).replace("$generate ", "")
+    message = str(self.message.content)
+    user = str(self.message.author)
+    remove_command = message.replace("$generate ", "")
+    command_list = re.findall(r'\$\w*', remove_command)
+    size = None
+    num = 1
+    flag = False
+    for command in command_list[:2]:
+        comm = command[1:]
+        if (comm in ['small', 'medium', 'large']):
+            size = comm
+        if (re.match("^[1-9]$|^10$", comm)):
+            num = comm
+
+    
+    prompt_word_list = [word for word in remove_command.split() if word.lower() not in command_list]
+    prompt = ' '.join(prompt_word_list)
     
     gen = GenDallE2()
-    response = gen.generate(input)
-    json_response = json.loads(str(response))
-    url = json_response.get("data")[0].get("url")
-    await self.message.channel.send(url)
+    response = gen.generate(prompt, size, num)
+    if isinstance(response, str):
+        await self.message.channel.send("OpenAI: *" + response + "*")
+    else:
+        for img in response["data"]:
+            image_path = ImageProcessor.create_image(img["b64_json"])
+            await self.message.channel.send(file=discord.File(image_path))
     
 async def com_bored(self):
     isAuthor = str(self.message.author) == "strööp#6969"
@@ -97,9 +115,6 @@ async def com_acc(self):
     # params = self.param_command[0]
     # acc = StatsClass(params, self.message.author)
     # response = acc.toMessage()
-    # if response == 404:
-    #     await self.message.add_reaction(error_emoji)
-    #     return
     # await self.message.channel.send(acc.toMessage())
     await self.message.channel.send("This functionality has been temporarily disabled until Blizzard fix their bloody api")
     return
