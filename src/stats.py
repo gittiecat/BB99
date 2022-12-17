@@ -1,4 +1,4 @@
-from database import DatabaseClass
+from util.database import DatabaseClass
 import requests
 import json
 

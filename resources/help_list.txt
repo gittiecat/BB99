@@ -3,4 +3,4 @@ $hi - self-explanatory
 $badwordstats <no. top(optional)> - get the stats on the top bad words of the server!
 $jed - appreciate Jed if he's suddenly nice! <a:monke:837809158392643634>
 $ro - show Ro his deserved overwatch rank
-$generate ($small|$medium|$large) ($<1-10>) <prompt> - generate an image using open ai's Dall E 2!
+$generate ($<small|medium|large>) ($<1-10>) <prompt> - generate an image using open ai's Dall E 2!

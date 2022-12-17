@@ -1,10 +1,11 @@
 import discord
-from database import DatabaseClass
+from util.database import DatabaseClass
 from image_processor import ImageProcessor
 from openai_impl.dalle2 import GenDallE2
 from valheim import ValheimClass
 from shlex import split
 import re
+import random
 
 
 error_emoji = "\U0001F6B1"
@@ -48,12 +49,10 @@ async def processor(self):
 
 async def com_generate(self):
     message = str(self.message.content)
-    user = str(self.message.author)
     remove_command = message.replace("$generate ", "")
     command_list = re.findall(r'\$\w*', remove_command)
     size = None
     num = 1
-    flag = False
     for command in command_list[:2]:
         comm = command[1:]
         if (comm in ['small', 'medium', 'large']):

@@ -2,21 +2,17 @@ import asyncio
 from chat_monitoring import ChatMonitoring
 from commands import CommandsListener
 from spongebob import SpongebobClass
-from tasks import TaskClass
-from database import DatabaseClass
-from stats import StatsClass
+from util.database import DatabaseClass
 import discord
-import random
-from datetime import datetime
 from shlex import split
 import os
 from dotenv import load_dotenv
 import subprocess
 import logging
 import platform
-from timeit import default_timer as timer
-from datetime import timedelta
 import os.path
+
+from util.reaction_handler import ReactionHandler
 
 LOGFILE_ERROR = 'resources/log/bot_error.log'
 LOGFILE_ALL = 'resources/log/bot.log'
@@ -77,27 +73,21 @@ async def on_message(message):
             await message.channel.send("Update has failed - please check the logs for more details.")
         return
     
-    ### Process commands
-    if message.content.startswith("$"):
+    if message.content.startswith("$"): ### Process commands
         await CommandsListener.process_commands(message, client)
         return
-    else: ### Chat monitoring
-        await ChatMonitoring.chat_monitor(message)
 
-    ####### SPONGEBOB
-    def check(reaction):
-        return reaction.emoji.name == "SpongebobMock"
+    ### Chat monitoring
+    await ChatMonitoring.chat_monitor(message)
 
+    ### Reaction watcher
     try:
-        await client.wait_for('reaction_add', timeout=180.0, check=check)
+        rh = ReactionHandler(message)
+        react = await client.wait_for('reaction_add', timeout=180.0, check=rh.check)
     except asyncio.TimeoutError:
         logging.debug("Timer ran out")
     else:
-        for reaction in message.reactions:
-            if reaction.emoji.name == "SpongebobMock":
-                spngbob = SpongebobClass().spongebob_format(message.content)
-                await message.channel.send(spngbob)
-                return
-    #######
+        await rh.process_reaction(react)
+        return
 
 client.run(TOKEN)

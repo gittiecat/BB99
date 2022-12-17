@@ -1,6 +1,6 @@
 
 import random
-from database import DatabaseClass
+from util.database import DatabaseClass
 
 
 class ChatMonitoring:
