@@ -18,9 +18,12 @@ async def createResponse(self):
     results = mod.moderate_message(message.content)
     flagged_types = mod.get_types(results)
     if not not flagged_types:
-        string = ', '.join(flagged_types)
-        result = f"OpenAI: *detected {string}*\nDo you need help?"
-        await message.channel.send(result)
+        if len(flagged_types) == 1 and flagged_types[0] == "sexual":
+            await message.channel.send(get_random_response())
+        else:
+            string = ', '.join(flagged_types)
+            result = f"OpenAI: *detected {string}*\nDo you need help?"
+            await message.channel.send(result)
     ###
 
     if str(message.author) != "strööp#6969" and \
@@ -56,6 +59,13 @@ async def createResponse(self):
             await message.channel.send("I agree with this statement.")
         if num == 1:
             await message.channel.send("I respect your opinion but I have to disagree.")
+
+def get_random_response():
+    responses = []
+    responses.append("yes daddy mmm")
+    responses.append("uwu :3")
+    responses.append("hell yeah")
+    return random.choice(responses)
 
 async def appreciateJed(message):
     r = int(random.random()*30)
