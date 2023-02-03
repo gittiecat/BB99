@@ -133,14 +133,8 @@ async def com_jed(self):
 async def com_ro(self):
     if str(self.message.author) == "Stokey™#9852":
         return
-    db = DatabaseClass()
-    switch = db.checkSwitches("ro_troll")[0][0]
-    reverse = (switch+1)%2
-    db.reverseSwitch(reverse, "ro_troll")
-    if reverse == 1:
-        await self.message.add_reaction("😈")
-    else:
-        await self.message.add_reaction("😇")
+    ro_user = await self.client.fetch_user('215959818018619392')
+    await ro_user.send("Hi Mr. Smith! Your presence is required at the {server} voice channel.".format(server = self.message.guild))    
 
 async def com_valheim(self):
     command = self.param_command[0]

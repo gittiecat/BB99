@@ -22,7 +22,7 @@ async def createResponse(self):
             await message.channel.send(get_random_response())
         else:
             string = ', '.join(flagged_types)
-            result = f"OpenAI: *detected {string}*\nDo you need help?"
+            result = f"*Detected {string}*\nDo you need help?"
             await message.channel.send(result)
     ###
 
