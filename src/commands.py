@@ -6,6 +6,7 @@ from valheim import ValheimClass
 from shlex import split
 import re
 import random
+import logging
 
 
 error_emoji = "\U0001F6B1"
@@ -44,8 +45,36 @@ async def processor(self):
             await com_bw_new(self)
         case "$generate":
             await com_generate(self)
+        case "$squad":
+            await com_squad_assemble(self)
         case _:
             await com_help(self, True)
+
+async def com_squad_assemble(self):
+    v_channels = self.message.guild.voice_channels
+    squad = [370117136271802368,579607700397096991,253611320065130496,194081279296274437,513761161443803137,215959818018619392,417558930877841408]
+    author_in_vc = False
+    author_vc = None
+    for channel in v_channels:
+        for user in channel.members:
+            if user.id in squad:
+                squad.remove(user.id)
+            if user.id == self.message.author.id:
+                author_in_vc = True
+                author_vc = channel.name
+
+    if author_in_vc and author_vc is not None:
+        for squadie in squad:
+            dm_user = await self.client.fetch_user(squadie)
+            try:
+                await dm_user.send("{sender} wants you to join the {vc} voice channel!".format(sender = self.message.author.display_name, vc = author_vc))
+            except:
+                logging.error("Could not send message to this user")
+            await self.message.add_reaction("🥶")
+    else:
+        await self.message.channel.send("You are not part of any voice channel 🤨")
+
+
 
 async def com_generate(self):
     message = str(self.message.content)
