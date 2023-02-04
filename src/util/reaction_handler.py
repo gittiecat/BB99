@@ -19,12 +19,11 @@ class ReactionHandler():
         if r == "SpongebobMock":
             await self.spongebob(self.message)
 
-    def check(self, reaction, user):
-        return reaction.emoji.name in self.reaction_list
+    def check(self, reaction):
+        return str(reaction.emoji) in self.reaction_list
 
     def get_reaction_list(self):
-        reactions = ["SpongebobMock"]
-        return reactions
+        return ["SpongebobMock"]
 
     async def spongebob(self, message):
         response = SpongebobClass().spongebob_format(message.content)
